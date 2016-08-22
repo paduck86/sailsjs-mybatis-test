@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+    <select id="iftest1">
+        SELECT emp_no
+             , birth_date
+             , first_name
+             , last_name
+             , gender
+             , hire_date
+          FROM employees
+        <if test="count != null">
+            LIMIT #{count}
+        </if>
+    </select>
+
+    <select id="iftest2">
+        SELECT emp_no
+             , birth_date
+             , first_name
+             , last_name
+             , gender
+             , hire_date
+          FROM employees
+         WHERE 1=1
+        <if test="gender === 'M' and first_name != null">
+           AND gender = #{gender}
+           AND first_name = #{first_name}
+        </if>
+        <if test="count != null">
+         LIMIT #{count}
+        </if>
+    </select>
+
+    <select id="fortest">
+        SELECT emp_no
+             , birth_date
+             , first_name
+             , last_name
+             , gender
+             , hire_date
+        FROM employees
+        WHERE 1=1
+          AND first_name in
+        <foreach item="first_name" index="index" collection="first_name_list" open="(" separator="," close=")">
+            #{first_name}
+        </foreach>
+        <if test="count != null">
+            LIMIT #{count}
+        </if>
+    </select>
+
+    <select id="choosetest">
+        SELECT emp_no
+             , birth_date
+             , first_name
+             , last_name
+             , gender
+             , hire_date
+          FROM employees
+         WHERE 1=1
+        <choose>
+            <when test="gender === 'M'">
+                AND gender = #{gender}
+            </when>
+            <when test="gender === 'F'">
+                AND gender = #{gender}
+            </when>
+            <otherwise>
+                AND gender in ('M','F')
+            </otherwise>
+        </choose>
+        <if test="count != null">
+            LIMIT #{count}
+        </if>
+    </select>
+
+    <select id="wheretest">
+        SELECT emp_no
+             , birth_date
+             , first_name
+             , last_name
+             , gender
+             , hire_date
+          FROM employees
+        <where>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+            <if test="first_name != null">
+                AND first_name = #{first_name}
+            </if>
+        </where>
+        <if test="count != null">
+            LIMIT #{count}
+        </if>
+    </select>
+
+    <insert id="insertonetest">
+        INSERT INTO employees
+        (birth_date, first_name, last_name, gender, hire_date)
+        VALUES
+        (#{birth_date},#{first_name},#{last_name},#{gender},#{hire_date} )
+    </insert>
+
+    <insert id="insertmanytest">
+        INSERT INTO employees
+        (birth_date, first_name, last_name, gender, hire_date)
+        VALUES
+        <foreach item="emp" index="index" collection="emp_arr" separator="," >
+            (#{emp.birth_date}, #{emp.first_name}, #{emp.last_name}, #{emp.gender}, #{emp.hire_date})
+        </foreach>
+    </insert>
+
+    <insert id="replacemanytest">
+        REPLACE INTO employees
+        (birth_date, first_name, last_name, gender, hire_date)
+        VALUES
+        <foreach item="emp" index="index" collection="emp_arr" separator="," >
+            (#{emp.birth_date}, #{emp.first_name}, #{emp.last_name}, #{emp.gender}, #{emp.hire_date})
+        </foreach>
+    </insert>
+
+    <update id="updatetest">
+        UPDATE employees
+           SET birth_date=#{birth_date},
+               hire_date=#{hire_date}
+        WHERE emp_no=#{emp_no}
+    </update>
+
+    <update id="updatesettest">
+        UPDATE employees
+        <set>
+            <if test="birth_date != null">birth_date=#{birth_date},</if>
+            <if test="first_name != null">first_name=#{first_name},</if>
+            <if test="last_name != null">last_name=#{last_name},</if>
+            <if test="gender != null">gender=#{gender},</if>
+            <if test="hire_date != null">hire_date=#{hire_date}</if>
+        </set>
+        WHERE emp_no=#{emp_no}
+    </update>
+</mapper>
