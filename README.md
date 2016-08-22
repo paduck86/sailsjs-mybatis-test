@@ -1,3 +1,5 @@
-# api
+# sailsjs-mybatis-test
 
-a [Sails](http://sailsjs.org) application
+1) execute sql : config/env/employee.sql
+2) npm install
+3) NODE_ENV=local node app.js
