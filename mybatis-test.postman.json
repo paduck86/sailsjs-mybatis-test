@@ -1,0 +1,375 @@
+{
+	"id": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+	"name": "Mybatis-test",
+	"description": "",
+	"order": [
+		"61247bf0-2c6f-34bd-67c5-f6e5c5e1d060",
+		"3f7e42cd-622d-7412-b4c8-3b2c76950050",
+		"1b2444e4-71e3-ffad-bf51-601117c11438",
+		"882d878b-04d2-bccc-8664-710434e39158",
+		"e4e4a5a4-ca5b-b42d-2b21-0cb922be7c8e",
+		"e5d4778f-e138-71b0-f887-f08d164423fe",
+		"5febaf3b-551d-5aa6-47e2-7cfc5dae8d2d",
+		"1c3b4180-89e8-1c21-09a6-e7d1d9da951d",
+		"bce3a586-63e4-d06f-2308-fe4819877aa9",
+		"34048fad-c872-aea5-7d96-0eb7e4978c18"
+	],
+	"folders": [],
+	"timestamp": 1471405454034,
+	"owner": "249179",
+	"public": false,
+	"requests": [
+		{
+			"id": "1b2444e4-71e3-ffad-bf51-601117c11438",
+			"headers": "",
+			"url": "localhost:1337/test/for?count=10&first_name=Jeong,Georgi&show=debug",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471492553285,
+			"name": "3. FOR 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "1c3b4180-89e8-1c21-09a6-e7d1d9da951d",
+			"headers": "",
+			"url": "localhost:1337/test/replacemany",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "birth_date",
+					"value": "1986-09-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "first_name",
+					"value": "JinSeok",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "last_name",
+					"value": "Jeong",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "gender",
+					"value": "M",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "hire_date",
+					"value": "2016-03-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "show",
+					"value": "debug",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": "{}",
+			"time": 1471495021631,
+			"name": "8. REPLACE 테스트 - many rows",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": [],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"folder": null
+		},
+		{
+			"id": "34048fad-c872-aea5-7d96-0eb7e4978c18",
+			"headers": "",
+			"url": "localhost:1337/test/updateset",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "emp_no",
+					"value": "500010",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "birth_date",
+					"value": "1988-09-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "hire_date",
+					"value": "2016-02-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "show",
+					"value": "debug",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471495071774,
+			"name": "10. UPDATE SET 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "3f7e42cd-622d-7412-b4c8-3b2c76950050",
+			"headers": "",
+			"url": "localhost:1337/test/if2?gender=M&first_name=Jeong&count=1&show=debug",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471421233662,
+			"name": "2. IF 테스트 - 다중비교 & 값비교",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "5febaf3b-551d-5aa6-47e2-7cfc5dae8d2d",
+			"headers": "",
+			"url": "localhost:1337/test/insertmany",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "birth_date",
+					"value": "1986-09-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "first_name",
+					"value": "JinSeok",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "last_name",
+					"value": "Jeong",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "gender",
+					"value": "M",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "hire_date",
+					"value": "2016-03-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "show",
+					"value": "debug",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471494948935,
+			"name": "7. INSERT 테스트 - many rows",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "61247bf0-2c6f-34bd-67c5-f6e5c5e1d060",
+			"headers": "",
+			"url": "localhost:1337/test/if1?count=1&show=debug",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471432835563,
+			"name": "1. IF 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "882d878b-04d2-bccc-8664-710434e39158",
+			"headers": "",
+			"url": "localhost:1337/test/choose?count=10&gender=M&show=debug",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471494888978,
+			"name": "4. CHOOSE 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "bce3a586-63e4-d06f-2308-fe4819877aa9",
+			"headers": "",
+			"url": "localhost:1337/test/update",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "emp_no",
+					"value": "500010",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "birth_date",
+					"value": "1988-09-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "hire_date",
+					"value": "2016-02-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "show",
+					"value": "debug",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471495034159,
+			"name": "9. UPDATE 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "e4e4a5a4-ca5b-b42d-2b21-0cb922be7c8e",
+			"headers": "",
+			"url": "localhost:1337/test/where?count=10&gender=M&first_name=Jeong&show=debug",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471494908640,
+			"name": "5. WHERE 테스트",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		},
+		{
+			"id": "e5d4778f-e138-71b0-f887-f08d164423fe",
+			"headers": "",
+			"url": "localhost:1337/test/insertone",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "birth_date",
+					"value": "1986-09-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "first_name",
+					"value": "JinSeok",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "last_name",
+					"value": "Jeong",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "gender",
+					"value": "M",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "hire_date",
+					"value": "2016-03-01",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "show",
+					"value": "debug",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1471494937023,
+			"name": "6. INSERT 테스트 - 1row",
+			"description": "",
+			"collectionId": "3394a298-f7d9-21c7-948d-b5d2900fc54d",
+			"responses": []
+		}
+	]
+}
