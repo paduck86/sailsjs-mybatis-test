@@ -107,11 +107,11 @@ var No = (function () {
     var myArray;
     var regex = new RegExp('#\{([_a-z.A-Z0-9]+)}', 'ig');
     var expressao = texto;
-
+    //console.log('expressao:::', expressao);
     while ((myArray = regex.exec(texto)) !== null) {
       var trecho = myArray[0];
       var valorPropriedade = this.getValue(dados, myArray[1].split('.'));
-
+      //console.log(myArray[1].split('.'), valorPropriedade);
       // console.log(trecho + " -> " + valorPropriedade);
       if (valorPropriedade == null) {
         expressao = expressao.replace(trecho, '?');
@@ -164,7 +164,7 @@ var NoString = (function (_super) {
   };
 
   NoString.prototype.obtenhaSql = function (comandoSql, dados) {
-    comandoSql.sql += _super.prototype.processeExpressao.call(this, this.texto, comandoSql, dados) + " ";
+    comandoSql.sql += _super.prototype.processeExpressao.call(this, this.texto.replace(/&gt;/g, '>').replace(/&lt;/g, '<'), comandoSql, dados) + " ";
   };
   return NoString;
 })(No);
@@ -231,14 +231,15 @@ var NoWhen = (function (_super) {
       identificadores.push(identificador);
     }
 
+    identificadores = _.uniq(identificadores);
     for( var i = 0; i < identificadores.length; i++ ) {
       var identificador = identificadores[i];
 
-      this.expressaoTeste = this.expressaoTeste.replace(identificador, "dados." + identificador);
+      this.expressaoTeste = S(this.expressaoTeste).replaceAll(identificador, "dados." + identificador);
     }
 
-    this.expressaoTeste = S(this.expressaoTeste).replaceAll('and', '&&').toString();
-    this.expressaoTeste = S(this.expressaoTeste).replaceAll('or', '||').toString();
+    this.expressaoTeste = S(this.expressaoTeste).replace(/ /g, '&nbsp;').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replaceAll('&nbsp;and&nbsp;', '&nbsp;&&&nbsp;').replaceAll('&nbsp;', ' ').toString();
+    this.expressaoTeste = S(this.expressaoTeste).replace(/ /g, '&nbsp;').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replaceAll('&nbsp;or&nbsp;', '&nbsp;||&nbsp;').replaceAll('&nbsp;', ' ').toString();
   }
 
   NoWhen.prototype.imprima = function () {
@@ -338,7 +339,7 @@ var NoForEach = (function (_super) {
       var item = colecao[i];
 
       var myArray;
-      var regex = new RegExp('#\{([a-z.A-Z,_]+)}', 'ig');
+      var regex = new RegExp('#\{([_a-z.A-Z0-9]+)}', 'ig');
 
       var expressao = this.texto;
 
@@ -346,12 +347,37 @@ var NoForEach = (function (_super) {
       while ((myArray = regex.exec(expressao)) !== null) {
         var trecho = myArray[0];
         var propriedade = myArray[1].replace(this.item + ".", '');
-        var valorPropriedade = this.getValue(item, propriedade.split("."));
+        var valorPropriedade;
+
+        if(typeof item === 'object') {
+          var value = this.getValue(item, propriedade.split("."));
+          valorPropriedade = value  === undefined ? undefined : value;
+          if(valorPropriedade === '' || valorPropriedade === "") {
+            valorPropriedade = null;
+          }
+
+          if (valorPropriedade === undefined/*valorPropriedade && valorPropriedade !== 0*/ /*&& valorPropriedade !== "" && valorPropriedade !== ''*/) {
+            valorPropriedade = this.getValue(dados, propriedade.split("."));
+
+            if(valorPropriedade === '' || valorPropriedade === "") {
+              valorPropriedade = null;
+            }
+          }
+        } else {
+          if(this.item === myArray[1]) {
+            valorPropriedade = item;
+          } else {
+            valorPropriedade = this.getValue(dados, propriedade.split("."));
+          }
+        }
 
         if (typeof valorPropriedade == "number") {
           novaExpressao = novaExpressao.replace(trecho, '?');
           comandoSql.adicioneParametro(valorPropriedade);
         } else if (typeof valorPropriedade == 'string') {
+          novaExpressao = novaExpressao.replace(trecho, '?');
+          comandoSql.adicioneParametro(valorPropriedade);
+        } else if (valorPropriedade === null) {
           novaExpressao = novaExpressao.replace(trecho, '?');
           comandoSql.adicioneParametro(valorPropriedade);
         }
@@ -388,14 +414,15 @@ var NoIf = (function (_super) {
       identificadores.push(identificador);
     }
 
+    identificadores = _.uniq(identificadores);
     for( var i = 0; i < identificadores.length; i++ ) {
       var identificador = identificadores[i];
 
-      this.expressaoTeste = this.expressaoTeste.replace(identificador, "dados." + identificador);
+      this.expressaoTeste = S(this.expressaoTeste).replaceAll(identificador, "dados." + identificador);
     }
 
-    this.expressaoTeste = S(this.expressaoTeste).replaceAll('and', '&&').toString();
-    this.expressaoTeste = S(this.expressaoTeste).replaceAll('or', '||').toString();
+    this.expressaoTeste = S(this.expressaoTeste).replace(/ /g, '&nbsp;').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replaceAll('&nbsp;and&nbsp;', '&nbsp;&&&nbsp;').replaceAll('&nbsp;', ' ').toString();
+    this.expressaoTeste = S(this.expressaoTeste).replace(/ /g, '&nbsp;').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replaceAll('&nbsp;or&nbsp;', '&nbsp;||&nbsp;').replaceAll('&nbsp;', ' ').toString();
   }
   NoIf.prototype.imprima = function () {
     console.log('if(' + this.expressaoTeste + '): ' + this.texto);
